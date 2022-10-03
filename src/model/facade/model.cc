@@ -14,7 +14,7 @@ s21::Model::instance s21::Model::GetInstance() {
 //   return def_data;
 // }
 
-s21::Model::scene_data s21::Model::GetSceneFromFile(std::string file_path) {
+s21::scene_data s21::Model::GetSceneFromFile(std::string file_path) {
   return parser_->GetSceneFromFile(file_path);
 }
 

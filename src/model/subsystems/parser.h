@@ -7,11 +7,12 @@
 #include <iostream>
 #include <vector>
 
+#include "../helpers/using.h"
+
 namespace s21 {
 class Parser {
   public:
     using instance = Parser*;
-    using scene_data = std::pair<std::vector<double>, std::vector<int>>;
     using parse_it = std::string::iterator;
 
   private:

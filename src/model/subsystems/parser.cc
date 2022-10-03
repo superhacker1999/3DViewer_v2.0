@@ -14,7 +14,7 @@ s21::Parser::instance s21::Parser::GetInstance() {
 Возвращает пару из векторов
 точек и полигонов
 */
-s21::Parser::scene_data s21::Parser::GetSceneFromFile(const std::string file_path) {
+s21::scene_data s21::Parser::GetSceneFromFile(const std::string file_path) {
   std::ifstream file;
   file.open(file_path);
   if (!file) {

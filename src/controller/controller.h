@@ -4,12 +4,12 @@
 #include <utility>
 #include <vector>
 #include "../model/facade/model.h"
+#include "../model/helpers/using.h"
 
 namespace s21 {
 class Controller {
   public:
     using instance = Controller*;
-    using scene_data = std::pair<std::vector<double>, std::vector<int>>;
 
   private:
     static Controller* p_controller_;

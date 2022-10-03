@@ -1,4 +1,4 @@
-#ifndef SRC_MODEL_FACADE_MODEL_H
+#ifndef SRC_MODEL_FACADE_MODEL_H_
 #define SRC_MODEL_FACADE_MODEL_H_
 
 #include <utility>
@@ -6,6 +6,7 @@
 #include <string>
 
 #include "../subsystems/subsystems.h"
+#include "../helpers/using.h"
 
 /* 
 This class has the only one instance
@@ -16,7 +17,6 @@ namespace s21 {
 class Model {
   public:
     using instance = Model*;
-    using scene_data = std::pair<std::vector<double>, std::vector<int>>;
 
   private:
     static Model* p_model_;
