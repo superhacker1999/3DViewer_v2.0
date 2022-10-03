@@ -1,10 +1,12 @@
 #include "parser.h"
 
-// s21::Parser::instance s21::Parser::GetInstance() {
-//   if (p_parser_ == nullptr)
-//     p_parser_ = new Parser();
-//   return p_parser_;
-// }
+s21::Parser* s21::Parser::p_parser_ = nullptr;
+
+s21::Parser::instance s21::Parser::GetInstance() {
+  if (p_parser_ == nullptr)
+    p_parser_ = new Parser();
+  return p_parser_;
+}
 
 /*
 Основной метод парсинга

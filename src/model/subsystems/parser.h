@@ -15,22 +15,22 @@ class Parser {
     using parse_it = std::string::iterator;
 
   private:
-    // static Parser* p_parser_;
+    static Parser* p_parser_;
     scene_data data_;
     std::vector<double>* dots_ = &(data_.first);
     std::vector<int>* polygons_ = &(data_.second);
 
-  public:
+  private:
     Parser() {}
-    Parser(const Parser&) = default;
-    Parser(Parser&&) = default;
-    Parser& operator=(Parser&) = default;
+    // Parser(const Parser&) = default;
+    // Parser(Parser&&) = default;
+    // Parser& operator=(Parser&) = default;
     
   public:
-    // static instance GetInstance();
+    static instance GetInstance();
     scene_data GetSceneFromFile(const std::string file_path);
     ~Parser() { 
-      // delete p_parser_;
+      delete p_parser_;
     }
 
   private:
