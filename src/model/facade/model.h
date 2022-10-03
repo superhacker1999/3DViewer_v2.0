@@ -19,22 +19,27 @@ class Model {
     using scene_data = std::pair<std::vector<double>, std::vector<int>>;
 
   private:
-    static Model* p_model_;
-    // Parser* parser_;
+    // static 
+    Model* p_model_;
+    Parser* parser_ = new Parser();
     // Shifter* shifter_;
     // Spinner* spinner_;
-
-    Model();
-    Model(const Model&) = delete;
-    Model(Model&&) = delete;
-    Model& operator=(Model&) = delete;
-    ~Model() {}
   public:
-    static instance GetInstance();
-    scene_data GetDefaultScene();
+    Model() {
+      // parser_ = s21::Parser::GetInstance();
+    }
+    Model(const Model&) = default;
+    Model(Model&&) = default;
+    Model& operator=(Model&) = default;
+    ~Model() {
+      delete parser_;
+    }
+  public:
+    // static instance GetInstance();
+    // scene_data GetDefaultScene();
     scene_data GetSceneFromFile(std::string file_path);
-    void SpinSceneBy(scene_data& data, uint8_t direction);
-    void ShiftSceneTo(scene_data& data, uint8_t direction);
+    // void SpinSceneBy(scene_data& data, uint8_t direction);
+    // void ShiftSceneTo(scene_data& data, uint8_t direction);
 };
 }  // namespace s21
 #endif  // SRC_MODEL_FACADE_MODEL_H_
