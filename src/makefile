@@ -1,6 +1,6 @@
 CC=gcc
 FLAGS=-Wall -Wextra -lstdc++ -std=c++17 -g
-SRC=test.cc model/subsystems/parser.cc model/facade/model.cc
+SRC=test.cc model/subsystems/parser.cc model/facade/model.cc controller/controller.cc
 clean:
 	rm -rf tests*
 

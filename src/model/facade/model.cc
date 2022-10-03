@@ -15,9 +15,7 @@ s21::Model::instance s21::Model::GetInstance() {
 // }
 
 s21::Model::scene_data s21::Model::GetSceneFromFile(std::string file_path) {
-  scene_data file_data;
-  file_data = parser_->GetSceneFromFile(file_path);
-  return file_data;
+  return parser_->GetSceneFromFile(file_path);
 }
 
 // void s21::Model::SpinSceneBy(scene_data& data, uint8_t direction) {

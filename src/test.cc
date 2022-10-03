@@ -1,11 +1,9 @@
-#include "model/facade/model.h"
-#include "model/subsystems/parser.h"
+#include "controller/controller.h"
 
 
 int main() {
-  s21::Model* model_ = s21::Model::GetInstance();
-  s21::Model::scene_data data = model_->GetSceneFromFile("/Users/padmemur/Desktop/3DViewer_v2_0/src/objects/mersedes.obj");
+  s21::Controller* controller_ = s21::Controller::GetInstance();
+  s21::Controller::scene_data data = controller_->GetSceneFromFile("/Users/padmemur/Desktop/3DViewer_v2_0/src/objects/mersedes.obj");
   std::cout<<std::endl<<data.first.size()<<"  "<<data.second.size();
-  model_ = s21::Model::GetInstance();
   return 0;
 }
