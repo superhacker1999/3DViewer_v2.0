@@ -21,7 +21,7 @@ s21::Parser::scene_data s21::Parser::GetSceneFromFile(const std::string file_pat
     std::cout<<"file does not exist\n";
   } else {
     ParseCycle_(file);
-    OutPutData();
+    // OutPutData();
     file.close();
   }
   

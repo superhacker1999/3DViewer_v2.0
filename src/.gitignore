@@ -1,5 +1,6 @@
 #something
 *.DS_Store
+*tests*
 
 # Prerequisites
 *.d

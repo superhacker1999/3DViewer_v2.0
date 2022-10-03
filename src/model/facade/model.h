@@ -27,11 +27,11 @@ class Model {
     Model() {
       parser_ = s21::Parser::GetInstance();
     }
-    // Model(const Model&) = default;
-    // Model(Model&&) = default;
-    // Model& operator=(Model&) = default;
+    Model(const Model&) = delete;
+    Model(Model&&) = delete;
+    Model& operator=(Model&) = delete;
     ~Model() {
-      delete p_model_;
+      ;
     }
   public:
     static instance GetInstance();

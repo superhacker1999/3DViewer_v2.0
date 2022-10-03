@@ -21,17 +21,20 @@ class Parser {
     std::vector<int>* polygons_ = &(data_.second);
 
   private:
-    Parser() {}
-    // Parser(const Parser&) = default;
-    // Parser(Parser&&) = default;
-    // Parser& operator=(Parser&) = default;
+    Parser() {
+      ;
+    }
+    ~Parser() {
+      ;
+    }
+    Parser(const Parser&) = delete;
+    Parser(Parser&&) = delete;
+    Parser& operator=(Parser&) = delete;
     
   public:
     static instance GetInstance();
     scene_data GetSceneFromFile(const std::string file_path);
-    ~Parser() { 
-      delete p_parser_;
-    }
+    
 
   private:
     // trash
