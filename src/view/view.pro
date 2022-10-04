@@ -9,26 +9,28 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    ../controller/controller.cc \
     ../model/facade/model.cc \
     ../model/subsystems/parser.cc \
+    interface/iface.cpp \
     main.cpp \
-    main_view.cpp \
-    render.cpp \
-    ui_show.cpp
+    render/render.cpp \
+    view.cpp
 
 HEADERS += \
+    ../controller/controller.h \
     ../model/facade/model.h \
     ../model/helpers/s21_matrix.h \
     ../model/helpers/using.h \
-    ../model/subsystems/parser.h  \
+    ../model/subsystems/parser.h \
     ../model/subsystems/subsystems.h \
-    ../controller/controller.h \
-    main_view.h \
-    render.h \
-    ui_show.h
+    interface/iface.h \
+    render/render.h \
+    view.h
 
 FORMS += \
-    ui_show.ui
+    interface/iface.ui \
+    view.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

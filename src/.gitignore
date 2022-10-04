@@ -1,6 +1,7 @@
 #something
 *.DS_Store
 *tests*
+build*
 
 # Prerequisites
 *.d

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>s21::view</class>
+ <widget class="QMainWindow" name="s21::view">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1180</width>
+    <height>792</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>view</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="s21::render" name="render" native="true">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>100</y>
+      <width>681</width>
+      <height>671</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="s21::iface" name="iface" native="true">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1180</width>
+      <height>792</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>s21::iface</class>
+   <extends>QWidget</extends>
+   <header>interface/iface.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>s21::render</class>
+   <extends>QWidget</extends>
+   <header>render/render.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
