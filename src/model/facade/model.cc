@@ -27,6 +27,6 @@ s21::scene_data s21::Model::GetSceneFromFile(std::string file_path) {
 //   // changing arrays
 // }
 
-// void s21::Model::ShiftSceneTo(scene_data& data, uint8_t direction, int shift_size) {
+// void s21::Model::ShiftSceneTo(scene_data& data, uint8_t direction, double shift_size) {
 //   // changing arrays
 // }

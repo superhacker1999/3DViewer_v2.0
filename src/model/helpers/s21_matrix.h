@@ -57,6 +57,8 @@ class S21Matrix {
     this->RemoveMatrix_();
   }
 
+
+
 //  Operators overloads
 
   void operator = (const S21Matrix& other) {
@@ -122,7 +124,7 @@ class S21Matrix {
     return !(this->EqMatrix(other));
   }
 
-  double operator() (int i, int j) {
+  double& operator() (int i, int j) {
     if (i >= this->rows_ || j >= this->columns_ || i < 0 || j < 0)
       throw std::out_of_range("Out of range");
     return this->matrix_[i][j];
@@ -293,7 +295,7 @@ class S21Matrix {
     return vector;
   }
 
-  S21Matrix VectorToMatrix(const std::vector<double> other) {
+  static S21Matrix VectorToMatrix(const std::vector<double> other) {
     S21Matrix matrix(other.size(), 3);
     auto it = other.begin();
     for (int i = 0; i < matrix.rows_; i++)

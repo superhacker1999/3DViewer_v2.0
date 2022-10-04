@@ -21,7 +21,6 @@ class Parser {
     std::vector<double>* dots_ = &(data_.first);
     std::vector<int>* polygons_ = &(data_.second);
 
-  private:
     Parser() {
       ;
     }
