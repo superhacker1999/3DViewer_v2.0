@@ -33,6 +33,7 @@ class Shifter {
   private:
     double GetShiftSize_(uint8_t direction);
     size_t GetStartPos_(uint8_t direction);
+    void ZoomChange_(uint8_t direction);
 
 };  // class Shifter
 }  // namespace s21

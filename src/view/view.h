@@ -30,19 +30,51 @@ class view : public QMainWindow {
   private slots:
     void SetSceneFromFile_();
 
-    void XAdd_();
-    void XSub_();
-    void YAdd_();
-    void YSub_();
-    void ZAdd_();
-    void ZSub_();
+    void XAdd_() {
+      controller_->ShiftSceneTo(data_, kXPLUS);
+    }
+    void XSub_() {
+      controller_->ShiftSceneTo(data_, kXMINUS);
+    }
+    void YAdd_() {
+      controller_->ShiftSceneTo(data_, kYPLUS);
+    }
+    void YSub_() {
+      controller_->ShiftSceneTo(data_, kYMINUS);
+    }
+    void ZAdd_() {
+      controller_->ShiftSceneTo(data_, kZPLUS);
+    }
+    void ZSub_() {
+      controller_->ShiftSceneTo(data_, kZMINUS);
+    }
 
-    void OXAdd_();
-    void OXSub_();
-    void OYAdd_();
-    void OYSub_();
-    void OZAdd_();
-    void OZSub_();
+    void OXAdd_() {
+      controller_->SpinSceneBy(data_, kOXPLUS);
+    }
+    void OXSub_() {
+      controller_->SpinSceneBy(data_, kOXMINUS);
+    }
+    void OYAdd_() {
+      controller_->SpinSceneBy(data_, kOYPLUS);
+    }
+    void OYSub_() {
+      controller_->SpinSceneBy(data_, kOYMINUS);
+    }
+    void OZAdd_() {
+      controller_->SpinSceneBy(data_, kOZPLUS);
+    }
+    void OZSub_() {
+      controller_->SpinSceneBy(data_, kOZMINUS);
+    }
+
+    void ZoomIn_() {
+      controller_->ShiftSceneTo(data_, kZOOMIN);
+    }
+
+    void ZoomOut_() {
+      controller_->ShiftSceneTo(data_, kZOOMOUT);
+    }
 
 };
 } // namespace s21

@@ -34,6 +34,9 @@ s21::view::view(QWidget *parent) : QMainWindow(parent) , ui(new s21::Ui::view) {
   connect(ui->iface, SIGNAL(onOZAdd()), this, SLOT(OZAdd_()));
   connect(ui->iface, SIGNAL(onOZSub()), this, SLOT(OZSub_()));
 
+  connect(ui->iface, SIGNAL(onZoomIn()), this, SLOT(ZoomIn_()));
+  connect(ui->iface, SIGNAL(onZoomOut()), this, SLOT(ZoomOut_()));
+
 }
 
 s21::view::~view() {
@@ -45,52 +48,7 @@ void s21::view::SetSceneFromFile_() {
   data_ = full_data.data;
   dot_min_ = full_data.min_and_max.first;
   dot_max_ = full_data.min_and_max.second;
+  ui->iface->SetFilePathLabel("Файл: " + ui->iface->GetFilePath() + "\nКоличество вершин: " \
+ + QString::number(data_.first.size()) + "\nКоличество ребер: " + QString::number(data_.second.size() / 3));
 }
 
-void s21::view::XAdd_() {
-  controller_->ShiftSceneTo(data_, kXPLUS);
-}
-
-void s21::view::XSub_() {
-  controller_->ShiftSceneTo(data_, kXMINUS);
-}
-
-void s21::view::YAdd_() {
-  controller_->ShiftSceneTo(data_, kYPLUS);
-}
-
-void s21::view::YSub_() {
-  controller_->ShiftSceneTo(data_, kYMINUS);
-}
-
-void s21::view::ZAdd_() {
-  controller_->ShiftSceneTo(data_, kZPLUS);
-}
-
-void s21::view::ZSub_() {
-  controller_->ShiftSceneTo(data_, kZMINUS);
-}
-
-void s21::view::OXAdd_() {
-  controller_->SpinSceneBy(data_, kOXPLUS);
-}
-
-void s21::view::OXSub_() {
-  controller_->SpinSceneBy(data_, kOXMINUS);
-}
-
-void s21::view::OYAdd_() {
-  controller_->SpinSceneBy(data_, kOYPLUS);
-}
-
-void s21::view::OYSub_() {
-  controller_->SpinSceneBy(data_, kOYMINUS);
-}
-
-void s21::view::OZAdd_() {
-  controller_->SpinSceneBy(data_, kOZPLUS);
-}
-
-void s21::view::OZSub_() {
-  controller_->SpinSceneBy(data_, kOZMINUS);
-}

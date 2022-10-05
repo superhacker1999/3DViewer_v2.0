@@ -30,6 +30,8 @@ s21::full_scene_data s21::Parser::GetSceneFromFile(const std::string file_path) 
   if (!file) {
     std::cout<<"file does not exist\n";
   } else {
+    data_.first.clear();
+    data_.second.clear();
     ParseCycle_(file);
   //  OutPutData();
     file.close();
@@ -192,8 +194,7 @@ int s21::Parser::GetFCount_(s21::Parser::parse_it start, s21::Parser::parse_it e
 для корректного отображения сцены
 */
 std::pair<double, double> s21::Parser::GetMinAndMax_() {
-  min_dot_val_ = data_.first.at(0);
-  max_dot_val_ = data_.first.at(0);
+  max_dot_val_ = min_dot_val_ = data_.first.at(0);
   for (auto it = data_.first.begin(); it != data_.first.end(); it++) {
     if (*it > max_dot_val_) max_dot_val_ = *it;
     if (*it < min_dot_val_) min_dot_val_ = *it;

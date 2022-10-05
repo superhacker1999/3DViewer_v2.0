@@ -26,10 +26,14 @@ s21::Shifter::instance s21::Shifter::GetInstance() {
 */
 void s21::Shifter::ShiftSceneTo(scene_data& data, uint8_t direction) {
   dots_ = &(data.first);
-  double shift_size = GetShiftSize_(direction);
-  size_t start = GetStartPos_(direction);
-  for (size_t i = start; i < dots_->size(); i+=3)
-    dots_->at(i) = dots_->at(i) + shift_size;
+  if (direction == kZOOMIN || direction == kZOOMOUT) {
+      ZoomChange_(direction);
+  } else {
+      double shift_size = GetShiftSize_(direction);
+      size_t start = GetStartPos_(direction);
+      for (size_t i = start; i < dots_->size(); i+=3)
+        dots_->at(i) = dots_->at(i) + shift_size;
+  }
 }
 
 /*
@@ -65,4 +69,10 @@ size_t s21::Shifter::GetStartPos_(uint8_t direction) {
   else 
     start_pos = 2;
   return start_pos;
+}
+
+void s21::Shifter::ZoomChange_(uint8_t direction) {
+  double zoom_percent = direction == kZOOMIN ? 1.1f : 0.9f;
+  for (auto it = dots_->begin(); it != dots_->end(); it++)
+    *it = *it * zoom_percent;
 }

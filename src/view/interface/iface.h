@@ -16,6 +16,7 @@ class iface : public QWidget {
     explicit iface(QWidget *parent = nullptr);
     ~iface();
   QString GetFilePath() {return filepath_; }
+  void SetFilePathLabel(QString filepath);
 
   private:
     Ui::iface *ui;
@@ -29,6 +30,7 @@ class iface : public QWidget {
     void ChooseFile_();
     void ShiftScene_();
     void SpinScene_();
+    void ZoomChange_();
 
   signals:
     void onFileChanged();
@@ -46,6 +48,9 @@ class iface : public QWidget {
     void onOYSub();
     void onOZAdd();
     void onOZSub();
+
+    void onZoomIn();
+    void onZoomOut();
 
 };
 } // namespace s21

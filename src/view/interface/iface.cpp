@@ -32,11 +32,12 @@ void s21::iface::ChooseFile_() {
   if (filepath_ == "") {
       ui->filepath_dots->setText("Выберите файл.");
   } else {
-//      ui->filepath_dots->setText("Файл: " + filepath_ + "\nКоличество вершин: " + \
-//      QString::number(ui->widget->dots_counter) + "\nКоличество ребер: " + QString::number(ui->widget->edges_counter / ui->widget->f_counter));
     emit onFileChanged();
     }
+}
 
+void s21::iface::SetFilePathLabel(QString filepath) {
+ ui->filepath_dots->setText(filepath);
 }
 
 void s21::iface::ShiftScene_() {
@@ -85,8 +86,21 @@ void s21::iface::SpinScene_() {
   }
 }
 
+void s21::iface::ZoomChange_() {
+  QPushButton* button = (QPushButton*)sender();
+  if (button == ui->zoom_add) {
+      emit onZoomIn();
+      ui->zoom_value->setText(QString::number(ui->zoom_value->text().toInt() + 10));
+  } else {
+      emit onZoomOut();
+      ui->zoom_value->setText(QString::number(ui->zoom_value->text().toInt() - 10));
+    }
+}
+
 void s21::iface::ConnectButtons_() {
   connect(ui->get_file_button, SIGNAL(clicked()), this, SLOT(ChooseFile_()));
+  connect(ui->zoom_add, SIGNAL(clicked()), this, SLOT(ZoomChange_()));
+  connect(ui->zoom_sub, SIGNAL(clicked()), this, SLOT(ZoomChange_()));
 
   for (auto it = shift_buttons_.begin(); it != shift_buttons_.end(); it++)
       connect(*it, SIGNAL(clicked()), this, SLOT(ShiftScene_()));
