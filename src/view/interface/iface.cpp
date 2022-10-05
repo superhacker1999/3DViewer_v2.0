@@ -1,6 +1,10 @@
 #include "iface.h"
 #include "ui_iface.h"
 
+/*
+Класс интерфейса
+Обрабатывает нажатие на кнопки
+*/
 
 s21::iface::iface(QWidget *parent) : QWidget(parent), ui(new s21::Ui::iface) {
   ui->setupUi(this);

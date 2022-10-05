@@ -1,6 +1,11 @@
 #include "view.h"
 #include "ui_view.h"
 
+/*
+Главный класс GUI
+содержащий в себе два виджета
+с UI и рендером (OpenGL)
+*/
 
 s21::view::view(QWidget *parent) : QMainWindow(parent) , ui(new s21::Ui::view) {
   ui->setupUi(this);

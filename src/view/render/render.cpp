@@ -1,5 +1,10 @@
 #include "render.h"
 
+/*
+Класс рендера наследуемый от OpenGL
+занимается исключительно отображением сцены
+*/
+
 s21::render::render(QWidget *parent) : QOpenGLWidget(parent) {
   ;
 }
