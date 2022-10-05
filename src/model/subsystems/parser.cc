@@ -1,7 +1,17 @@
 #include "parser.h"
 
+/*
+Класс парсинга вызываемый из главного фасадного класса Model
+Используется паттерн проектирования singletone
+Парсит файл .obj и подготавливает данные для
+рендера
+*/
+
 s21::Parser* s21::Parser::p_parser_ = nullptr;
 
+/*
+Метод для получения экземпляра класса
+*/
 s21::Parser::instance s21::Parser::GetInstance() {
   if (p_parser_ == nullptr)
     p_parser_ = new Parser();
@@ -11,8 +21,8 @@ s21::Parser::instance s21::Parser::GetInstance() {
 /*
 Основной метод парсинга
 Принимает путь к .obj файлу
-Возвращает пару из векторов
-точек и полигонов
+возвращает данные о точках, полигонах и мин. макс.
+значения точек с коэффициентом
 */
 s21::full_scene_data s21::Parser::GetSceneFromFile(const std::string file_path) {
   std::ifstream file;
@@ -48,6 +58,8 @@ void s21::Parser::ParseCycle_(std::ifstream& file) {
 /*
 Метод для парсинга строки приходящей
 из основного цикла парсинга
+отсюда вызываются методы обработки
+V строк и F строк
 */
 void s21::Parser::ParseLine_(std::string& string) {
     auto it = string.begin();
@@ -62,6 +74,7 @@ void s21::Parser::ParseLine_(std::string& string) {
 /*
 Метод обработки точек,
 принимает итератор на строку из ParseLine
+закидывает в вектор три точки найденные в строке
 */
 void s21::Parser::VProcessing_(parse_it &iterator) {
   for (int i = 0; i < 3; i++)
@@ -72,6 +85,12 @@ void s21::Parser::VProcessing_(parse_it &iterator) {
 Метод обработки полигонов,
 принимает итераторы на начало и конец
 строки из ParseLine
+закидывает индексы точек, которые нужно соединить в полигон
+в вектор, предварительно вычитая из каждого индекса единицу
+и редактируя индексы точек в верной последовательности,
+которую переваривает OpenGL
+f 1 2 3 4 превращается в 
+  0 1 1 2 2 3 3 0
 */
 void s21::Parser::FProcessing_(parse_it &start_it, parse_it& end_it) {
   int f_count = GetFCount_(start_it, end_it);
@@ -94,7 +113,12 @@ void s21::Parser::FProcessing_(parse_it &start_it, parse_it& end_it) {
   }
 }
 
-double s21::Parser::GetNextNumber_(s21::Parser::parse_it &it) {
+/*
+Метод для получения числа из строки
+Принимает указатель на итератор парсера
+вовзвращает найденное число
+*/
+double s21::Parser::GetNextNumber_(parse_it &it) {
   std::string number;
   while (!IsNum_(*it)) {
     if (*it == '/')
@@ -108,15 +132,27 @@ double s21::Parser::GetNextNumber_(s21::Parser::parse_it &it) {
   return atof(number.c_str());
 }
 
+/*
+Метод для определения символа как число
+принимает char (разыменование итератора парсера)
+вовзращает true - число, false - другой символ
+*/
 bool s21::Parser::IsNum_(char symbol) {
   return ((symbol >= '0' && symbol <= '9') || symbol == '-' || symbol == '.') ? true : false;
 }
 
+/*
+Метод для перемещения итератора
+при встрече слэшей
+например:
+v 1/2/2 3/3/1 4/3/1
+*/
 void s21::Parser::SkipSlashes_(parse_it &iterator) {
   while (*iterator != ' ')
     iterator++;
   iterator++;
 }
+
 
 void s21::Parser::OutPutData() {
   std::cout<<"Точки:\n";
@@ -135,6 +171,12 @@ void s21::Parser::OutPutData() {
   }
 }
 
+/*
+Метод для определения
+кол-ва чисел в строке f
+так как полигоны могут быть
+из трех либо четырех точек
+*/
 int s21::Parser::GetFCount_(s21::Parser::parse_it start, s21::Parser::parse_it end) {
   int count = 0;
   for (; start != end; start++) {
@@ -144,6 +186,11 @@ int s21::Parser::GetFCount_(s21::Parser::parse_it start, s21::Parser::parse_it e
   return count;
 }
 
+/*
+Метод для определения
+максимальных и минимальных точек
+для корректного отображения сцены
+*/
 std::pair<double, double> s21::Parser::GetMinAndMax_() {
   min_dot_val_ = data_.first.at(0);
   max_dot_val_ = data_.first.at(0);
