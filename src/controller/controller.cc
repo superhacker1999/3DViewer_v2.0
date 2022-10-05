@@ -15,3 +15,7 @@ s21::scene_data s21::Controller::GetSceneFromFile(std::string file_path) {
 s21::scene_data s21::Controller::GetDefaultScene() {
   return model_->GetDefaultScene();
 }
+
+void s21::Controller::ShiftSceneTo(scene_data& data, uint8_t direction) {
+  model_->ShiftSceneTo(data, direction);
+}

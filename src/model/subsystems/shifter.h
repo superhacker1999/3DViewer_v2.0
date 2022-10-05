@@ -11,6 +11,14 @@ class Shifter {
   public:
     using instance = Shifter*;
     using dots_vec = std::vector<double>*;
+    struct mins_and_maxes {
+      double x_min;
+      double x_max;
+      double y_min;
+      double y_max;
+      double z_min;
+      double z_max;
+    };
 
   private:
     static Shifter* p_shifter_;
@@ -28,9 +36,11 @@ class Shifter {
 
   public:
     static instance GetInstance();
-    void ShiftSceneTo(scene_data& data, uint8_t direction, double shift_size);
+    void ShiftSceneTo(scene_data& data, uint8_t direction);
 
   private:
+    double GetShiftSize_(uint8_t direction);
+    size_t GetStartPos_(uint8_t direction);
 
 };  // class Shifter
 }  // namespace s21

@@ -29,7 +29,7 @@ class Controller {
     scene_data GetDefaultScene();
     scene_data GetSceneFromFile(std::string file_path);
     // void SpinSceneBy(scene_data& data, uint8_t direction);
-    // void ShiftSceneTo(scene_data& data, uint8_t direction);
+    void ShiftSceneTo(scene_data& data, uint8_t direction);
 
 
 };  // class Controller

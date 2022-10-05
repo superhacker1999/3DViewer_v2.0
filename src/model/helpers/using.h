@@ -5,14 +5,20 @@
 namespace s21 {
   using scene_data = std::pair<std::vector<double>, std::vector<int>>;
   enum directions {
-    kOX = 1,
-    kOY = 2,
-    kOZ = 3,
-    kZOOMIN = 4,
-    kZOOMOUT = 5,
-    kX = 6,
-    kY = 7,
-    kZ = 8
+    kOXPLUS = 1,
+    kOXMINUS = 2,
+    kOYPLUS = 3,
+    kOYMINUS = 4,
+    kOZPLUS = 5, 
+    kOZMINUS = 6,
+    kZOOMIN = 7,
+    kZOOMOUT = 8,
+    kXPLUS = 9,
+    kXMINUS = 10,
+    kYPLUS = 11,
+    kYMINUS = 12,
+    kZPLUS = 13,
+    kZMINUS = 14
   };
 }
 #endif  // SRC_MODEL_HELPERS_USING_H_

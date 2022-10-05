@@ -21,11 +21,12 @@ class Model {
   private:
     static Model* p_model_;
     Parser* parser_;
-    // Shifter* shifter_;
+    Shifter* shifter_;
     // Spinner* spinner_;
   private:
     Model() {
       parser_ = s21::Parser::GetInstance();
+      shifter_ = s21::Shifter::GetInstance();
     }
     Model(const Model&) = delete;
     Model(Model&&) = delete;
@@ -38,7 +39,7 @@ class Model {
     scene_data GetDefaultScene();
     scene_data GetSceneFromFile(std::string file_path);
     // void SpinSceneBy(scene_data& data, uint8_t direction);
-    // void ShiftSceneTo(scene_data& data, uint8_t direction);
+    scene_data ShiftSceneTo(scene_data& data, uint8_t direction);
 };
 }  // namespace s21
 #endif  // SRC_MODEL_FACADE_MODEL_H_
