@@ -26,9 +26,9 @@ class Controller {
     }
   public:
     static instance GetInstance();
-    scene_data GetDefaultScene();
-    scene_data GetSceneFromFile(std::string file_path);
-    // void SpinSceneBy(scene_data& data, uint8_t direction);
+    full_scene_data GetDefaultScene();
+    full_scene_data GetSceneFromFile(std::string file_path);
+    void SpinSceneBy(scene_data& data, uint8_t direction);
     void ShiftSceneTo(scene_data& data, uint8_t direction);
 
 

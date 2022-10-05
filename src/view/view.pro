@@ -12,6 +12,8 @@ SOURCES += \
     ../controller/controller.cc \
     ../model/facade/model.cc \
     ../model/subsystems/parser.cc \
+    ../model/subsystems/shifter.cc \
+    ../model/subsystems/spinner.cc \
     interface/iface.cpp \
     main.cpp \
     render/render.cpp \
@@ -23,6 +25,8 @@ HEADERS += \
     ../model/helpers/s21_matrix.h \
     ../model/helpers/using.h \
     ../model/subsystems/parser.h \
+    ../model/subsystems/shifter.h \
+    ../model/subsystems/spinner.h \
     ../model/subsystems/subsystems.h \
     interface/iface.h \
     render/render.h \

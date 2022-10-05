@@ -20,12 +20,32 @@ class iface : public QWidget {
   private:
     Ui::iface *ui;
     QString filepath_;
+    QVector<QPushButton*> shift_buttons_;
+    QVector<QPushButton*> spin_buttons_;
+
+    void ConnectButtons_();
 
   private slots:
     void ChooseFile_();
+    void ShiftScene_();
+    void SpinScene_();
 
   signals:
     void onFileChanged();
+
+    void onXAdd();
+    void onXSub();
+    void onYAdd();
+    void onYSub();
+    void onZAdd();
+    void onZSub();
+
+    void onOXAdd();
+    void onOXSub();
+    void onOYAdd();
+    void onOYSub();
+    void onOZAdd();
+    void onOZSub();
 
 };
 } // namespace s21

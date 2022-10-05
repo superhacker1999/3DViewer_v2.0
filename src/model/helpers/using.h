@@ -20,5 +20,9 @@ namespace s21 {
     kZPLUS = 13,
     kZMINUS = 14
   };
+  struct full_scene_data {
+    scene_data data;
+    std::pair<double, double> min_and_max;
+  };
 }
 #endif  // SRC_MODEL_HELPERS_USING_H_

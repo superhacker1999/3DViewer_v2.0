@@ -4,8 +4,10 @@ s21::render::render(QWidget *parent) : QOpenGLWidget(parent) {
   ;
 }
 
-void s21::render::SetData(s21::scene_data* data) {
+void s21::render::SetData(s21::scene_data* data, double* min, double* max) {
   data_ = data;
+  dot_min_ = min;
+  dot_max_ = max;
   is_settings_loaded_ = true;
 }
 
@@ -14,15 +16,14 @@ void s21::render::initializeGL() {
     glEnable(GL_DEPTH_TEST);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(-3, 3, -3, 3, 3, -3);
+    glOrtho(-*(dot_max_), *dot_max_, -*(dot_max_), *dot_max_, *dot_max_, -*(dot_max_));
     glLineWidth(1);
   }
 }
 
 void s21::render::resizeGL(int w, int h) {
-  if (is_settings_loaded_) {
+  if (is_settings_loaded_)
     glViewport(0, 0, w, h);
-  }
 }
 
 void s21::render::paintGL() {
@@ -34,7 +35,7 @@ void s21::render::paintGL() {
 
       glMatrixMode(GL_PROJECTION);
       glLoadIdentity();
-      glOrtho(-3, 3, -3, 3, 3, -3);
+      glOrtho(-*(dot_max_), *dot_max_, -*(dot_max_), *dot_max_, *dot_max_, -*(dot_max_));
       glBegin(GL_DEPTH_TEST);
       glEnableClientState(GL_VERTEX_ARRAY);
 

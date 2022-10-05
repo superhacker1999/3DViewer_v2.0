@@ -20,6 +20,8 @@ class Parser {
     scene_data data_;
     std::vector<double>* dots_ = &(data_.first);
     std::vector<int>* polygons_ = &(data_.second);
+    double min_dot_val_;
+    double max_dot_val_;
 
     Parser() {
       ;
@@ -33,7 +35,7 @@ class Parser {
     
   public:
     static instance GetInstance();
-    scene_data GetSceneFromFile(const std::string file_path);
+    full_scene_data GetSceneFromFile(const std::string file_path);
     
 
   private:
@@ -47,7 +49,8 @@ class Parser {
     void SkipSlashes_(parse_it &iterator);
     void VProcessing_(parse_it &iterator);
     void FProcessing_(parse_it &start_it, parse_it &end_it);
-    int GetSpacesCount_(parse_it start, parse_it end);
+    int GetFCount_(parse_it start, parse_it end);
+    std::pair<double, double> GetMinAndMax_();
   
 
 };  // class Parser

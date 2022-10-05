@@ -14,17 +14,19 @@ s21::Parser::instance s21::Parser::GetInstance() {
 Возвращает пару из векторов
 точек и полигонов
 */
-s21::scene_data s21::Parser::GetSceneFromFile(const std::string file_path) {
+s21::full_scene_data s21::Parser::GetSceneFromFile(const std::string file_path) {
   std::ifstream file;
   file.open(file_path);
   if (!file) {
     std::cout<<"file does not exist\n";
   } else {
     ParseCycle_(file);
-    OutPutData();
+  //  OutPutData();
     file.close();
   }
-  return data_;
+  auto min_and_max = GetMinAndMax_();
+  full_scene_data data = {data_, min_and_max};
+  return data;
 }
 
 /*
@@ -72,12 +74,12 @@ void s21::Parser::VProcessing_(parse_it &iterator) {
 строки из ParseLine
 */
 void s21::Parser::FProcessing_(parse_it &start_it, parse_it& end_it) {
-  int spaces_count = GetSpacesCount_(start_it, end_it);
-  int number = 0, iterator = spaces_count;
+  int f_count = GetFCount_(start_it, end_it);
+  int number = 0, iterator = f_count;
   int first_number = 0;
   while (iterator > 0) {
     number = GetNextNumber_(start_it) - 1;
-    if (iterator == spaces_count) {
+    if (iterator == f_count) {
       polygons_->push_back(number);
       first_number = number;
     } else if (iterator == 1) {
@@ -133,10 +135,23 @@ void s21::Parser::OutPutData() {
   }
 }
 
-int s21::Parser::GetSpacesCount_(s21::Parser::parse_it start, s21::Parser::parse_it end) {
+int s21::Parser::GetFCount_(s21::Parser::parse_it start, s21::Parser::parse_it end) {
   int count = 0;
-  for (; start != end; start++)
-    if (*start == ' ')
+  for (; start != end; start++) {
+    if (*start == ' ' && IsNum_(*(start + 1)))
       count++;
+  }
   return count;
+}
+
+std::pair<double, double> s21::Parser::GetMinAndMax_() {
+  min_dot_val_ = data_.first.at(0);
+  max_dot_val_ = data_.first.at(0);
+  for (auto it = data_.first.begin(); it != data_.first.end(); it++) {
+    if (*it > max_dot_val_) max_dot_val_ = *it;
+    if (*it < min_dot_val_) min_dot_val_ = *it;
+  }
+  min_dot_val_ *= 1.4;
+  max_dot_val_ *= 1.4;
+  return {min_dot_val_, max_dot_val_};
 }

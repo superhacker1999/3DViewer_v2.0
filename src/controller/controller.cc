@@ -8,14 +8,18 @@ s21::Controller::instance s21::Controller::GetInstance() {
   return p_controller_;
 }
 
-s21::scene_data s21::Controller::GetSceneFromFile(std::string file_path) {
+s21::full_scene_data s21::Controller::GetSceneFromFile(std::string file_path) {
   return model_->GetSceneFromFile(file_path);
 }
 
-s21::scene_data s21::Controller::GetDefaultScene() {
+s21::full_scene_data s21::Controller::GetDefaultScene() {
   return model_->GetDefaultScene();
 }
 
 void s21::Controller::ShiftSceneTo(scene_data& data, uint8_t direction) {
   model_->ShiftSceneTo(data, direction);
+}
+
+void s21::Controller::SpinSceneBy(scene_data& data, uint8_t direction) {
+  model_->SpinSceneBy(data, direction);
 }

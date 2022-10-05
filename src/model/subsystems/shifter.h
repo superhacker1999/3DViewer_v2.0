@@ -2,7 +2,7 @@
 #define SRC_MODEL_SUBSYSTEMS_SHIFTER_H_
 
 #include "../helpers/using.h"
-#include "../helpers/s21_matrix.h"
+#include <math.h>
 
 #include <cstdint>
 
@@ -11,14 +11,6 @@ class Shifter {
   public:
     using instance = Shifter*;
     using dots_vec = std::vector<double>*;
-    struct mins_and_maxes {
-      double x_min;
-      double x_max;
-      double y_min;
-      double y_max;
-      double z_min;
-      double z_max;
-    };
 
   private:
     static Shifter* p_shifter_;

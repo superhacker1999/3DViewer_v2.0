@@ -3,6 +3,6 @@
 
 #include "parser.h"
 #include "shifter.h"
-// #include "spinner.h"
+#include "spinner.h"
 
 #endif  // SRC_SUBSYSTEMS_SUBSYSTEMS_H_

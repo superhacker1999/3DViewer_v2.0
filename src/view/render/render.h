@@ -21,10 +21,12 @@ class render : public QOpenGLWidget {
     void initializeGL() override;
     void resizeGL(int w, int h) override;
     void paintGL() override;
+    double* dot_min_;
+    double* dot_max_;
 
 
   public:
-    void SetData(scene_data*);
+    void SetData(scene_data*, double* min, double* max);
 
 
 };

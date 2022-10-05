@@ -287,7 +287,7 @@ class S21Matrix {
     }
   }
 
-  std::vector<double> MatrixToVector(const S21Matrix& matrix) {
+  static std::vector<double> MatrixToVector(const S21Matrix& matrix) {
     std::vector<double> vector;
     for (int i = 0; i < matrix.rows_; i++)
       for (int j = 0; j < matrix.columns_; j++)
@@ -296,7 +296,7 @@ class S21Matrix {
   }
 
   static S21Matrix VectorToMatrix(const std::vector<double> other) {
-    S21Matrix matrix(other.size(), 3);
+    S21Matrix matrix(other.size() / 3, 3);
     auto it = other.begin();
     for (int i = 0; i < matrix.rows_; i++)
       for (int j = 0; j < matrix.columns_; j++)
