@@ -23,6 +23,7 @@ class Model {
     Parser* parser_;
     Shifter* shifter_;
     Spinner* spinner_;
+
   private:
     Model() {
       parser_ = s21::Parser::GetInstance();

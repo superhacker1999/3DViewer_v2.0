@@ -21,8 +21,7 @@ void s21::render::initializeGL() {
     glEnable(GL_DEPTH_TEST);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-//    glOrtho(-*(dot_max_), *dot_max_, -*(dot_max_), *dot_max_, *dot_max_, -*(dot_max_));
-    glFrustum(-*(dot_max_), *dot_max_, -*(dot_max_), *dot_max_, *dot_max_, -*(dot_max_));
+    glOrtho(-*(dot_max_), *dot_max_, -*(dot_max_), *dot_max_, *dot_max_, -*(dot_max_));
     glLineWidth(1);
   }
 }
@@ -41,8 +40,7 @@ void s21::render::paintGL() {
 
       glMatrixMode(GL_PROJECTION);
       glLoadIdentity();
-//      glOrtho(-*(dot_max_), *dot_max_, -*(dot_max_), *dot_max_, *dot_max_, -*(dot_max_));
-      glFrustum(*(dot_max_), -*(dot_max_), *(dot_max_), -*(dot_max_), -*(dot_max_), *(dot_max_));
+      glOrtho(-*(dot_max_), *dot_max_, -*(dot_max_), *dot_max_, *dot_max_, -*(dot_max_));
       glBegin(GL_DEPTH_TEST);
       glEnableClientState(GL_VERTEX_ARRAY);
 

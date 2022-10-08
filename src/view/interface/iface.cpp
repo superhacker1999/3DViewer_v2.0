@@ -28,12 +28,11 @@ s21::iface::~iface() {
 
 void s21::iface::ChooseFile_() {
   filepath_ = QFileDialog::getOpenFileName(0, "Выбрать файл", "", "*.obj");
-
   if (filepath_ == "") {
-      ui->filepath_dots->setText("Выберите файл.");
+    ui->filepath_dots->setText("Выберите файл.");
   } else {
     emit onFileChanged();
-    }
+  }
 }
 
 void s21::iface::SetFilePathLabel(QString filepath) {

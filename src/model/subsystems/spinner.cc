@@ -45,7 +45,7 @@ void s21::Spinner::SpinSceneBy(scene_data& data, uint8_t direction) {
 */
 void s21::Spinner::RotationOX_(double angle) {
   S21Matrix dots_matrix = S21Matrix::VectorToMatrix(dots_);
-  for (int i = 0; i < dots_matrix.GetRows(); i++) {
+  for (int i = 0; i < dots_matrix.GetRows(); ++i) {
     double temp_y = dots_matrix(i, 1);
     double temp_z = dots_matrix(i, 2);
     dots_matrix(i, 1) = cos(angle) * temp_y + sin(angle) * temp_z;
@@ -88,3 +88,22 @@ void s21::Spinner::RotationOZ_(double angle) {
   std::vector<double> res_vector = S21Matrix::MatrixToVector(dots_matrix);
   dots_ = std::move(res_vector);
 }
+
+
+
+// void s21::Spinner::RotationOX_(double angle) {
+//   S21Matrix dots_matrix = S21Matrix::VectorToMatrix(dots_);
+//   #pragma omp parallel
+//   {
+//     #pragma omp for
+//     for (int i = 0; i < dots_matrix.GetRows(); ++i) {
+//       double temp_y = dots_matrix(i, 1);
+//       double temp_z = dots_matrix(i, 2);
+//       dots_matrix(i, 1) = cos(angle) * temp_y + sin(angle) * temp_z;
+//       dots_matrix(i, 2) = sin(angle) * (-temp_y) + cos(angle) * temp_z;
+//     }
+//   }
+//   std::vector<double> res_vector = S21Matrix::MatrixToVector(dots_matrix);
+//   dots_ = std::move(res_vector);
+// }
+

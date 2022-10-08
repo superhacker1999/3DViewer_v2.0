@@ -30,7 +30,8 @@ HEADERS += \
     ../model/subsystems/subsystems.h \
     interface/iface.h \
     render/render.h \
-    view.h
+    view.h \
+    /usr/local/lib/gcc/11/gcc/x86_64-apple-darwin20/11/include/omp.h
 
 FORMS += \
     interface/iface.ui \

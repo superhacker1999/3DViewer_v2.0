@@ -295,22 +295,25 @@ class S21Matrix {
   }
 
   static std::vector<double> MatrixToVector(const S21Matrix& matrix) {
-    std::vector<double> vector;
-    for (int i = 0; i < matrix.rows_; i++)
-      for (int j = 0; j < matrix.columns_; j++)
-        vector.push_back(matrix.matrix_[i][j]);
+    std::vector<double> vector(matrix.columns_ * matrix.rows_);
+    auto it = vector.begin();
+    for (int i = 0; i < matrix.rows_; ++i) {
+      for (int j = 0; j < matrix.columns_; ++j) {
+          *it = matrix.matrix_[i][j];  
+          ++it;
+        }
+    }
     return vector;
   }
 
-  static S21Matrix VectorToMatrix(const std::vector<double> other) {
+  static S21Matrix VectorToMatrix(const std::vector<double>& other) {
     S21Matrix matrix(other.size() / 3, 3);
     auto it = other.begin();
-    for (int i = 0; i < matrix.rows_; i++)
-      for (int j = 0; j < matrix.columns_; j++)
+    for (int i = 0; i < matrix.rows_; ++i)
+      for (int j = 0; j < matrix.columns_; ++j)
         matrix.matrix_[i][j] = *(it++);
     return matrix;
   }
-
 
 // Internal methods
  private:

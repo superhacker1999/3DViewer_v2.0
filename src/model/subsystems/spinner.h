@@ -1,6 +1,7 @@
 #ifndef SRC_MODEL_SUBSYSTEMS_SPINNER_H_
 #define SRC_MODEL_SUBSYSTEMS_SPINNER_H_
 
+
 #include "../helpers/using.h"
 #include "../helpers/s21_matrix.h"
 
