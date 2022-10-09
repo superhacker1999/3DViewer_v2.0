@@ -15,8 +15,8 @@ s21::view::view(QWidget *parent) : QMainWindow(parent) , ui(new s21::Ui::view) {
   data_ = full_data.data;
   dot_min_ = full_data.min_and_max.first;
   dot_max_ = full_data.min_and_max.second;
-
-  ui->render->SetData(&data_, &dot_min_, &dot_max_);
+  GetDefaultColors_();
+  ui->render->SetData(&data_, &dot_min_, &dot_max_, &background_color_, &lines_color_, &dots_color_);
 
   connect(ui->iface, SIGNAL(onFileChanged()), this, SLOT(SetSceneFromFile_()));
 
@@ -37,6 +37,8 @@ s21::view::view(QWidget *parent) : QMainWindow(parent) , ui(new s21::Ui::view) {
   connect(ui->iface, SIGNAL(onZoomIn()), this, SLOT(ZoomIn_()));
   connect(ui->iface, SIGNAL(onZoomOut()), this, SLOT(ZoomOut_()));
 
+  connect(ui->iface, SIGNAL(onColorChanged()), this, SLOT(ChangeColor_()));
+
 }
 
 s21::view::~view() {
@@ -52,3 +54,14 @@ void s21::view::SetSceneFromFile_() {
  + QString::number(data_.first.size()) + "\nКоличество ребер: " + QString::number(data_.second.size() / 3));
 }
 
+void s21::view::GetDefaultColors_() {
+  background_color_ = QColor::fromRgbF(0.0f, 0.0f, 0.0f);  // black
+  lines_color_ = QColor::fromRgbF(0.13f, 0.545f, 0.13f);  // green
+  dots_color_ = QColor::fromRgbF(0.13f, 0.545f, 0.13f);  // green
+}
+
+void s21::view::ChangeColor_() {
+  background_color_ = ui->iface->GetBackgroundColor();
+  lines_color_ = ui->iface->GetLinesColor();
+  dots_color_ = ui->iface->GetDotsColor();
+}

@@ -9,11 +9,35 @@ s21::render::render(QWidget *parent) : QOpenGLWidget(parent) {
   ;
 }
 
-void s21::render::SetData(s21::scene_data* data, double* min, double* max) {
+void s21::render::SetData(s21::scene_data* data, double* min, double* max,
+                QColor* back, QColor* line, QColor* dots) {
   data_ = data;
   dot_min_ = min;
   dot_max_ = max;
+  background_color_ = back;
+  lines_color_ = line;
+  dots_color_ = dots;
   is_settings_loaded_ = true;
+}
+
+void s21::render::ChangeLinesColor_() {
+  float* colors = new float[3];
+  if (lines_color_->isValid()) {
+    lines_color_->getRgbF(&colors[0], &colors[1], &colors[2]);
+    glColor3d(colors[0], colors[1], colors[2]);
+  }
+  delete []colors;
+}
+
+void s21::render::ChangeBackgroundColor_() {
+  float* colors = new float[4];
+  if (background_color_->isValid()) {
+    background_color_->getRgbF(&colors[0], &colors[1], &colors[2], &colors[3]);
+    QOpenGLFunctions *f = QOpenGLContext::currentContext()->functions();
+    f->glClearColor(colors[0], colors[1], colors[2], colors[3]);
+    f->glClear(GL_COLOR_BUFFER_BIT);
+  }
+  delete []colors;
 }
 
 void s21::render::initializeGL() {
@@ -34,9 +58,7 @@ void s21::render::resizeGL(int w, int h) {
 void s21::render::paintGL() {
   if (is_settings_loaded_) {
       //back color
-      QOpenGLFunctions *f = QOpenGLContext::currentContext()->functions();
-      f->glClearColor(0, 0, 0, 0);
-      f->glClear(GL_COLOR_BUFFER_BIT);
+      ChangeBackgroundColor_();
 
       glMatrixMode(GL_PROJECTION);
       glLoadIdentity();
@@ -45,7 +67,7 @@ void s21::render::paintGL() {
       glEnableClientState(GL_VERTEX_ARRAY);
 
       //lines color
-      glColor3d(255, 255, 255);
+      ChangeLinesColor_();
 
       glVertexPointer(3, GL_DOUBLE, 0, data_->first.data());
       glLineWidth(2);

@@ -23,10 +23,17 @@ class render : public QOpenGLWidget {
     void paintGL() override;
     double* dot_min_;
     double* dot_max_;
+    QColor* background_color_;
+    QColor* lines_color_;
+    QColor* dots_color_;
 
 
   public:
-    void SetData(scene_data*, double* min, double* max);
+    void SetData(scene_data*, double*, double*, QColor*, QColor*, QColor*);
+
+  private:
+     void ChangeLinesColor_();
+     void ChangeBackgroundColor_();
 
 
 };

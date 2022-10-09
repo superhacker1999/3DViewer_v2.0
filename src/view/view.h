@@ -26,6 +26,11 @@ class view : public QMainWindow {
     scene_data data_;
     double dot_min_;
     double dot_max_;
+    QColor background_color_;
+    QColor lines_color_;
+    QColor dots_color_;
+
+    void GetDefaultColors_();
 
   private slots:
     void SetSceneFromFile_();
@@ -75,6 +80,8 @@ class view : public QMainWindow {
     void ZoomOut_() {
       controller_->ShiftSceneTo(data_, kZOOMOUT);
     }
+
+    void ChangeColor_();
 
 };
 } // namespace s21

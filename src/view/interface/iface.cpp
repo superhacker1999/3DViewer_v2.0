@@ -100,10 +100,25 @@ void s21::iface::ConnectButtons_() {
   connect(ui->get_file_button, SIGNAL(clicked()), this, SLOT(ChooseFile_()));
   connect(ui->zoom_add, SIGNAL(clicked()), this, SLOT(ZoomChange_()));
   connect(ui->zoom_sub, SIGNAL(clicked()), this, SLOT(ZoomChange_()));
+  connect(ui->back_colour, SIGNAL(clicked()), this, SLOT(ChangeColor_()));
+  connect(ui->lines_colour, SIGNAL(clicked()), this, SLOT(ChangeColor_()));
+  connect(ui->tops_colour, SIGNAL(clicked()), this, SLOT(ChangeColor_()));
 
   for (auto it = shift_buttons_.begin(); it != shift_buttons_.end(); it++)
       connect(*it, SIGNAL(clicked()), this, SLOT(ShiftScene_()));
 
   for (auto it = spin_buttons_.begin(); it != spin_buttons_.end(); it++)
       connect(*it, SIGNAL(clicked()), this, SLOT(SpinScene_()));
+}
+
+void s21::iface::ChangeColor_() {
+  QPushButton *button = (QPushButton *)sender();
+  if (button == ui->lines_colour) {
+      lines_color_ = QColorDialog::getColor(Qt::red, this, tr("colors"));
+  } else if (button == ui->back_colour) {
+      background_color_ = QColorDialog::getColor(Qt::red, this, tr("colors"));
+  } else {
+      dots_color_ = QColorDialog::getColor(Qt::red, this, tr("colors"));
+  }
+  emit onColorChanged();
 }
