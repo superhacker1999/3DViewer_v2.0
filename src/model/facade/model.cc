@@ -10,7 +10,6 @@ parser, spinner, shifter
 
 s21::Model* s21::Model::p_model_ = nullptr;
 
-
 /*
 Метод для получения экземпляра класса
 */

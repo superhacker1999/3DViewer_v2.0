@@ -23,17 +23,25 @@ class render : public QOpenGLWidget {
     void paintGL() override;
     double* dot_min_;
     double* dot_max_;
+    bool* is_line_striple_;
+    int* line_width_;
+    int* display_dots_;
+    float* dots_size_;
     QColor* background_color_;
     QColor* lines_color_;
     QColor* dots_color_;
 
 
+
   public:
-    void SetData(scene_data*, double*, double*, QColor*, QColor*, QColor*);
+    void SetData(scene_data*, double*, double*, QColor*,
+                 QColor*, QColor*, bool*, int*, int*, float*);
 
   private:
      void ChangeLinesColor_();
      void ChangeBackgroundColor_();
+     void ChooseLinesType_();
+     void ChangeDots_();
 
 
 };
