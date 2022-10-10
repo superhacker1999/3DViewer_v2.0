@@ -8,6 +8,7 @@
 
 s21::view::view(QWidget *parent) : QMainWindow(parent), ui(new s21::Ui::view) {
   ui->setupUi(this);
+  RestoreSettings_();
   controller_ = s21::Controller::GetInstance();
   full_scene_data full_data = controller_->GetDefaultScene();
   data_ = full_data.data;
@@ -19,7 +20,10 @@ s21::view::view(QWidget *parent) : QMainWindow(parent), ui(new s21::Ui::view) {
   ConnectButtons_();
 }
 
-s21::view::~view() { delete ui; }
+s21::view::~view() {
+  SaveSettings_();
+  delete ui;
+}
 
 void s21::view::SetSceneFromFile_() {
   full_scene_data full_data =
@@ -77,4 +81,48 @@ void s21::view::ConnectButtons_() {
           SLOT(ChangeDotsSettings_()));
   connect(ui->iface, SIGNAL(onScreenshotButtonclicked()), this,
           SLOT(MakeScreenshot_()));
+}
+
+void s21::view::SaveSettings_() {
+  QSettings settings("3DViewer_v2_0", "Settings");
+  float red, green, blue;
+  background_color_.getRgbF(&red, &green, &blue);
+  settings.setValue("backgroundColorRed", red);
+  settings.setValue("backgroundColorGreen", green);
+  settings.setValue("backgroundColorBlue", blue);
+  lines_color_.getRgbF(&red, &green, &blue);
+  settings.setValue("LinesColorRed", red);
+  settings.setValue("LinesColorGreen", green);
+  settings.setValue("LinesColorBlue", blue);
+  dots_color_.getRgbF(&red, &green, &blue);
+  settings.setValue("DotsColorRed", red);
+  settings.setValue("DotsColorGreen", green);
+  settings.setValue("DotsColorBlue", blue);
+  settings.setValue("LineWidth", line_width_);
+  settings.setValue("LineType", is_line_stripple_);
+  settings.setValue("DotsType", display_dots_);
+  settings.setValue("DotsSize", dots_size_);
+}
+
+void s21::view::RestoreSettings_() {
+  QSettings settings("3DViewer_v2_0", "Settings");
+  float r = settings.value("backgroundColorRed", 0.0f).toFloat();
+  float g = settings.value("backgroundColorGreen", 0.0f).toFloat();
+  float b = settings.value("backgroundColorBlue", 0.0f).toFloat();
+  background_color_ = QColor::fromRgbF(r, g, b);
+
+  r = settings.value("LinesColorRed", 0.13f).toFloat();
+  g = settings.value("LinesColorGreen", 0.545f).toFloat();
+  b = settings.value("LinesColorBlue", 0.13f).toFloat();
+  lines_color_ = QColor::fromRgbF(r, g, b);
+
+  r = settings.value("DotsColorRed", 0.13f).toFloat();
+  g = settings.value("DotsColorGreen", 0.545f).toFloat();
+  b = settings.value("DotsColorBlue", 0.13f).toFloat();
+  dots_color_ = QColor::fromRgbF(r, g, b);
+
+  line_width_ = settings.value("LineWidth", 1).toInt();
+  is_line_stripple_ = settings.value("LineType", false).toBool();
+  display_dots_ = settings.value("DotsType", 0).toInt();
+  dots_size_ = settings.value("DotsSize", 0.0f).toFloat();
 }

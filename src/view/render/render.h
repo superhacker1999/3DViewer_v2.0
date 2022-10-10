@@ -7,6 +7,7 @@
 #include <QMouseEvent>
 #include <QOpenGLFunctions>
 #include <QOpenGLWidget>
+#include <QSettings>
 
 #include "../../model/helpers/using.h"
 
@@ -40,6 +41,8 @@ class render : public QOpenGLWidget {
   void ChangeBackgroundColor_();
   void ChooseLinesType_();
   void ChangeDots_();
+  void SaveSettings_();
+  void RestoreSettings_();
 };
 }  // namespace s21
 

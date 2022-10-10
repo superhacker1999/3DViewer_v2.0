@@ -26,15 +26,17 @@ class view : public QMainWindow {
   scene_data data_;
   double dot_min_;
   double dot_max_;
-  QColor background_color_ = QColor::fromRgbF(0.0f, 0.0f, 0.0f);
-  QColor lines_color_ = QColor::fromRgbF(0.13f, 0.545f, 0.13f);
-  QColor dots_color_ = QColor::fromRgbF(0.13f, 0.545f, 0.13f);
-  int line_width_ = 1;
-  bool is_line_stripple_ = false;
-  int display_dots_ = 0;
-  float dots_size_ = 0.0f;
+  QColor background_color_;
+  QColor lines_color_;
+  QColor dots_color_;
+  int line_width_;
+  bool is_line_stripple_;
+  int display_dots_;
+  float dots_size_;
 
   void ConnectButtons_();
+  void SaveSettings_();
+  void RestoreSettings_();
 
  private slots:
   void SetSceneFromFile_();
