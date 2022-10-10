@@ -34,9 +34,6 @@ class Parser {
   full_scene_data GetSceneFromFile(const std::string file_path);
 
  private:
-  // trash
-  void OutPutData();
-
   void ParseCycle_(std::ifstream& file);
   void ParseLine_(std::string& string);
   double GetNextNumber_(parse_it& iterator);

@@ -8,10 +8,8 @@
 #include "../helpers/using.h"
 #include "../subsystems/subsystems.h"
 
-/*
-This class has the only one instance
-so that we use the singletone pattern
-*/
+/*This class has the only one instance
+so that we use the singletone pattern*/
 
 namespace s21 {
 class Model {
