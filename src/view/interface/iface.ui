@@ -552,7 +552,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Настройка ребер:</string>
+    <string>Настройка линий:</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="x_rot_value">
