@@ -14,10 +14,10 @@ SOURCES += \
     ../model/subsystems/parser.cc \
     ../model/subsystems/shifter.cc \
     ../model/subsystems/spinner.cc \
-    interface/iface.cpp \
-    main.cpp \
-    render/render.cpp \
-    view.cpp
+    interface/iface.cc \
+    main.cc \
+    render/render.cc \
+    view.cc
 
 HEADERS += \
     ../controller/controller.h \
