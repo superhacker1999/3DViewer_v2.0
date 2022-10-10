@@ -12,8 +12,7 @@ s21::Shifter* s21::Shifter::p_shifter_ = nullptr;
 Метод для получения экземпляра класса
 */
 s21::Shifter::instance s21::Shifter::GetInstance() {
-  if (p_shifter_ == nullptr)
-    p_shifter_ = new Shifter();
+  if (p_shifter_ == nullptr) p_shifter_ = new Shifter();
   return p_shifter_;
 }
 
@@ -27,12 +26,12 @@ s21::Shifter::instance s21::Shifter::GetInstance() {
 void s21::Shifter::ShiftSceneTo(scene_data& data, uint8_t direction) {
   dots_ = &(data.first);
   if (direction == kZOOMIN || direction == kZOOMOUT) {
-      ZoomChange_(direction);
+    ZoomChange_(direction);
   } else {
-      double shift_size = GetShiftSize_(direction);
-      size_t start = GetStartPos_(direction);
-      for (size_t i = start; i < dots_->size(); i+=3)
-        dots_->at(i) = dots_->at(i) + shift_size;
+    double shift_size = GetShiftSize_(direction);
+    size_t start = GetStartPos_(direction);
+    for (size_t i = start; i < dots_->size(); i += 3)
+      dots_->at(i) = dots_->at(i) + shift_size;
   }
 }
 
@@ -50,7 +49,7 @@ double s21::Shifter::GetShiftSize_(uint8_t direction) {
     if (*it < min) min = *it;
   }
   double result = 0.05f * fabs(max - min);
-  if (direction == kXMINUS || direction ==  kYMINUS || direction == kZMINUS)
+  if (direction == kXMINUS || direction == kYMINUS || direction == kZMINUS)
     result *= -1;
   return result;
 }
@@ -66,7 +65,7 @@ size_t s21::Shifter::GetStartPos_(uint8_t direction) {
     start_pos = 0;
   else if (direction == kYMINUS || direction == kYPLUS)
     start_pos = 1;
-  else 
+  else
     start_pos = 2;
   return start_pos;
 }

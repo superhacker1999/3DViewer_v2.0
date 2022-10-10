@@ -1,33 +1,36 @@
 #include "view.h"
+
 #include "ui_view.h"
 
 /*Главный класс GUI
 содержащий в себе два виджета
 с UI и рендером (OpenGL)*/
 
-s21::view::view(QWidget *parent) : QMainWindow(parent) , ui(new s21::Ui::view) {
+s21::view::view(QWidget *parent) : QMainWindow(parent), ui(new s21::Ui::view) {
   ui->setupUi(this);
   controller_ = s21::Controller::GetInstance();
   full_scene_data full_data = controller_->GetDefaultScene();
   data_ = full_data.data;
   dot_min_ = full_data.min_and_max.first;
   dot_max_ = full_data.min_and_max.second;
-  ui->render->SetData(&data_, &dot_min_, &dot_max_, &background_color_, &lines_color_,
-                      &dots_color_, &is_line_stripple_, &line_width_, &display_dots_, &dots_size_);
+  ui->render->SetData(&data_, &dot_min_, &dot_max_, &background_color_,
+                      &lines_color_, &dots_color_, &is_line_stripple_,
+                      &line_width_, &display_dots_, &dots_size_);
   ConnectButtons_();
 }
 
-s21::view::~view() {
-  delete ui;
-}
+s21::view::~view() { delete ui; }
 
 void s21::view::SetSceneFromFile_() {
-  full_scene_data full_data = controller_->GetSceneFromFile(ui->iface->GetFilePath().toStdString());
+  full_scene_data full_data =
+      controller_->GetSceneFromFile(ui->iface->GetFilePath().toStdString());
   data_ = full_data.data;
   dot_min_ = full_data.min_and_max.first;
   dot_max_ = full_data.min_and_max.second;
-  ui->iface->SetFilePathLabel("Файл: " + ui->iface->GetFilePath() + "\nКоличество вершин: " \
- + QString::number(data_.first.size()) + "\nКоличество ребер: " + QString::number(data_.second.size() / 3));
+  ui->iface->SetFilePathLabel(
+      "Файл: " + ui->iface->GetFilePath() +
+      "\nКоличество вершин: " + QString::number(data_.first.size()) +
+      "\nКоличество ребер: " + QString::number(data_.second.size() / 3));
 }
 
 void s21::view::ChangeColor_() {
@@ -48,8 +51,7 @@ void s21::view::ChangeDotsSettings_() {
 
 void s21::view::MakeScreenshot_() {
   QString path = ui->iface->GetScreenshotPath();
-  if (!path.isEmpty())
-    ui->render->grab().save(path);
+  if (!path.isEmpty()) ui->render->grab().save(path);
 }
 
 void s21::view::ConnectButtons_() {
@@ -69,7 +71,10 @@ void s21::view::ConnectButtons_() {
   connect(ui->iface, SIGNAL(onZoomIn()), this, SLOT(ZoomIn_()));
   connect(ui->iface, SIGNAL(onZoomOut()), this, SLOT(ZoomOut_()));
   connect(ui->iface, SIGNAL(onColorChanged()), this, SLOT(ChangeColor_()));
-  connect(ui->iface, SIGNAL(onLineSettingsChanged()), this, SLOT(ChangeLineSettings_()));
-  connect(ui->iface, SIGNAL(onDotsSettingsChanged()), this, SLOT(ChangeDotsSettings_()));
-  connect(ui->iface, SIGNAL(onScreenshotButtonclicked()), this, SLOT(MakeScreenshot_()));
+  connect(ui->iface, SIGNAL(onLineSettingsChanged()), this,
+          SLOT(ChangeLineSettings_()));
+  connect(ui->iface, SIGNAL(onDotsSettingsChanged()), this,
+          SLOT(ChangeDotsSettings_()));
+  connect(ui->iface, SIGNAL(onScreenshotButtonclicked()), this,
+          SLOT(MakeScreenshot_()));
 }

@@ -12,8 +12,7 @@ s21::Spinner* s21::Spinner::p_spinner_ = nullptr;
 Метод для получения экземпляра класса
 */
 s21::Spinner::instance s21::Spinner::GetInstance() {
-  if (p_spinner_ == nullptr)
-    p_spinner_ = new Spinner();
+  if (p_spinner_ == nullptr) p_spinner_ = new Spinner();
   return p_spinner_;
 }
 
@@ -89,8 +88,6 @@ void s21::Spinner::RotationOZ_(double angle) {
   dots_ = std::move(res_vector);
 }
 
-
-
 // void s21::Spinner::RotationOX_(double angle) {
 //   S21Matrix dots_matrix = S21Matrix::VectorToMatrix(dots_);
 //   #pragma omp parallel
@@ -106,4 +103,3 @@ void s21::Spinner::RotationOZ_(double angle) {
 //   std::vector<double> res_vector = S21Matrix::MatrixToVector(dots_matrix);
 //   dots_ = std::move(res_vector);
 // }
-
