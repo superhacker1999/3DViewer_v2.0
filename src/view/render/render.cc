@@ -54,6 +54,7 @@ void s21::render::ChooseLinesType_() {
 void s21::render::ChangeDots_() {
   float* colors = new float[4];
   if (*display_dots_ > 0) {
+    glDisable(GL_POINT_SMOOTH);
     glPointSize(*dots_size_);
     if (*display_dots_ == 2) glEnable(GL_POINT_SMOOTH);
     if (dots_color_->isValid()) {
